@@ -20,8 +20,8 @@
                 </ul>
             </nav>
             <div class="header-text">
-                <p>Devops Engineer </p>
-                <h1>Hi, I'm <span>Shiv</span> Kumar<br> Arora From Canada</h1>
+                <p>DevOps Engineer</p>
+                <h1>Hi, I'm <span id="animated-text"></span><br>From Canada</h1>
             </div>
         </div>
     </div>
@@ -73,6 +73,15 @@
             </div>
         </div>
     </div>
+    
+
+    <!-- CHANGES BY MY OWN Modal for dynamically loading portfolio details -->
+    <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
     <script>
 
@@ -91,5 +100,66 @@
         }
     
     </script>
+
+    <!-------------------------- CHANGES BY MY OWN -------------------------------------------------------------------->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- JavaScript for modal interaction and content loading -->
+    <script>
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const modal = document.getElementById('portfolio-modal');
+                const modalBody = document.getElementById('modal-body');
+                fetch('portfolio-details/' + this.dataset.contentId + '.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        modalBody.innerHTML = html;
+                        modal.style.display = "block";
+                    })
+                    .catch(error => console.error('Error loading the content:', error));
+            });
+        });
+
+        document.querySelector('.close-button').addEventListener('click', function() {
+            document.getElementById('portfolio-modal').style.display = "none";
+        });
+    </script>
+
+    <!-- JavaScript for continuous typing and erasing effect -->
+    <script>
+        const fullName = "Shiv Kumar Arora";
+        let index = 0;
+        const speed = 150; // Speed of typing
+        const delayBeforeDelete = 2000; // Delay before starting deletion
+        let isDeleting = false;
+    
+        function typeAnimation() {
+            const currentText = isDeleting ? fullName.slice(0, index--) : fullName.slice(0, index++);
+            document.getElementById('animated-text').innerHTML = currentText;
+    
+            if (!isDeleting && currentText === fullName) {
+                setTimeout(() => isDeleting = true, delayBeforeDelete);
+            } else if (isDeleting && currentText === '') {
+                isDeleting = false;
+                index = 0;
+            }
+    
+            setTimeout(typeAnimation, isDeleting ? speed / 2 : speed);
+        }
+    
+        document.addEventListener('DOMContentLoaded', typeAnimation);
+    </script>
+
+
+
 </body>
 </html>
