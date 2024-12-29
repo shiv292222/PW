@@ -84,33 +84,63 @@ nav ul li a:hover::after{
 
 /* -----------------------------------ABOUT-------------------------------------------- */
 #about{
-    padding: 80px 0;
+    padding: 10px 0; 
     color: #ababab;
 }
 
-.row{
+.row {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: space-between; /* Space between for desktop views */
+    align-items: center; /* Align items vertically in center */
+    flex-wrap: nowrap; /* Prevent wrapping to maintain layout consistency */
 }
 
-.about-col-1{
-    flex-basis: 35%;
+
+/* .about-col-1 {
+    flex: 0 1 25%; /* Flex grow, flex shrink, flex basis 
+    max-width: 25%;
+} */
+
+.about-col-1 {
+    flex: 0 1 240px; /* Adjust this to set a fixed width for the image column */
+    max-width: 240px; /* Make sure the image container doesn't grow or shrink */
 }
+
 
 .about-col-1 img{
     width: 100%;
     border-radius: 15px;
+    /* --extra-- */
+    height: auto;  
+    max-height: 300px;  
+    object-fit: cover; /* This will cover the area of the box without stretching the image */
+    border-radius: 10px;
 }
 
-.about-col-2{
-    flex-basis: 60%;
+/* .about-col-2 {
+    flex: 1 1 70%; /* Flex grow, flex shrink, flex basis 
+    max-width: 70%; /* Maximum width 
+    padding-left: 20px; /* Space between image and text 
+}  */
+
+.about-col-2 {
+    flex: 0 1 70%; /* Increase the text area */
+    padding-left: 15px; /* Comfortable padding */
 }
 
-.sub-title{
-    font-size: 60px;
-    font-weight: 600;
-    color: white;
+/* extra */
+
+.about-col-2 {
+    min-height: 600px;  /* Adjust based on your content's typical height to prevent up and down movement */
+}
+
+
+.sub-title {
+    font-size: 48px; /* Reduced from 60px for better proportion */
+    font-weight: 600; /* Keeping the weight to maintain emphasis */
+    color: white; /* Ensures visibility against potentially dark backgrounds */
+    /* margin-bottom: 20px; Adds some space below the title */
+    margin-bottom: 5px;
 }
 
 .tab-titles{
@@ -120,7 +150,7 @@ nav ul li a:hover::after{
 
 .tab-links{
     margin-right: 50px;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     position: relative;
@@ -129,26 +159,37 @@ nav ul li a:hover::after{
 .tab-links::after{
     content: '';
     width: 0;
-    height: 3px;
+    /* height: 3px; */
+    height: 2px;
     background: #ff004f;
     position: absolute;
     left: 0;
     bottom: -8px;
-    transition: 0.5s;
+    /* transition: 0.5s; */
+    transition: width 0.5s;
+}
+
+.tab-links::after {
+    height: 2px; /* Thinner line for a more refined look */
+    background-color: red; /* Keeps the brand color for active state */
 }
 
 .tab-links.active-link::after{
-    width: 50%;
+    /* width: 50%; */
+    width: 100%;
 }
 
 .tab-contents ul li{
     list-style: none;
-    margin: 10px 0;
+
+    font-size: 13px;
+
+    margin: 8px 0;
 }
 
 .tab-contents ul li span{
     color: #b54769;
-    font-size: 18px;
+    font-size: 15px;
 }
 .tab-contents{
     display: none;
@@ -158,6 +199,120 @@ nav ul li a:hover::after{
 }
 
 /* --------------------------------------------------CHANGES BY MY OWN ---------------------------------------------- */
+
+/* ----------------------------------------------------ABOUT SECTION ----------------------------------------------------- */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.about-col-1 img, .about-col-2 h1, .about-col-2 p, .tab-links {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 100ms); /* Delay based on order */
+}
+
+/* Initialize all animated elements to be invisible initially */
+[data-animate="true"] {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* When elements are visible in viewport, animate them */
+[data-animate="true"].visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeIn 0.8s forwards;
+}
+
+.tab-links:hover {
+    background-color: #444; /* Subtle hover effect */
+    transition: background-color 0.3s;
+}
+
+.tab-contents {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    /* transition: opacity 0.5s ease-in, transform 0.5s ease-in; */
+    transition: all 0.3s ease-out;
+}
+
+.tab-contents.active-tab {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+/* -------------some extra------------------ */
+
+/* Typography enhancements */
+.about-col-2 h1 {
+    font-size: 2em; /* Larger for headings */
+    color: #fff; /* White or a lighter color for better contrast */
+    /* font-family: 'Roboto', sans-serif; Example font */
+}
+
+.about-col-2 p {
+    font-size: 15px; /* Optimized for readability on most devices */
+    color: #ccc; /* Light gray for soft contrast */
+    line-height: 1.5; /* Improved line spacing for readability */
+    margin-bottom: 15px; /* Space below paragraphs to separate from other content */
+}
+
+/* Spacing enhancements */
+.about-col-1, .about-col-2 {
+    padding: 20px; /* Added padding around content */
+}
+
+.tab-titles {
+    /* margin-top: 30px; /* More space above the tabs 
+    margin-bottom: 20px; */
+    margin: 10px 0 20px;
+}
+
+.tab-contents {
+    /* padding: 20px; Padding inside tab content for spacing */
+    padding: 10px;
+    background-color: #333; /* Slightly lighter background for tab content area */
+    border-radius: 8px; /* Rounded corners for tab content boxes */
+}
+
+/* @media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack columns vertically on smaller screens 
+    }
+    .about-col-1, .about-col-2 {
+        flex: 0 1 100%; /* Take full width 
+        max-width: 100%; /* Maximum width 
+        padding: 10px 0; /* Padding adjustment for mobile 
+    }
+} */
+
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+    }
+
+    .about-col-1, .about-col-2 {
+        flex-basis: 100%; /* Each column takes full width */
+        max-width: 100%; /* Full width on small screens */
+    }
+
+    .about-col-2 {
+        padding-top: 10px; /* Space between image and text */
+    }
+}
+
+
+
+
+
+
+/* ------------------------------------------------------ABOUT SEC END------------------------------------------------------ */
+
+
 /* Styling for portfolio items */
 .portfolio-item {
     transition: transform 0.3s ease, box-shadow 0.3s ease;

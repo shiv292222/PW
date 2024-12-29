@@ -30,10 +30,10 @@
     <div id="about">
         <div class="container">
             <div class="row">
-                <div class="about-col-1">
+                <div class="about-col-1" data-animate="true">
                     <img src="images/user.jpg">
                 </div>
-                <div class="about-col-2">
+                <div class="about-col-2" data-animate="true">
                     <h1 class="sub-title">About me</h1>
                     <p>
                         Driven and detail-oriented Software Engineering graduate with a 4.0 GPA, passionate about designing innovative solutions in 
@@ -44,9 +44,9 @@
                         and collaborative development, with a focus on enhancing efficiency and driving innovation in fast-paced environments.
                     </p>
                     <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                        <p class="tab-links active-link" onclick="opentab('skills', event)">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience', event)">Experience</p>
+                        <p class="tab-links" onclick="opentab('education', event)">Education</p>
                     </div>
                     <div class="tab-contents active-tab" id="skills">
                         <ul>
@@ -108,22 +108,7 @@
         </div>
     </div>
 
-    <script>
 
-        var tablinks = document.getElementsByClassName("tab-links");
-        var tabcontents = document.getElementsByClassName("tab-contents");
-    
-        function opentab(tabname){
-            for(tablink of tablinks){
-                tablink.classList.remove("active-link");
-            }
-            for(tabcontent of tabcontents){
-                tabcontent.classList.remove("active-tab");
-            }
-            event.currentTarget.classList.add("active-link");
-            document.getElementById(tabname).classList.add("active-tab");
-        }
-    
     </script>
 
     <!-------------------------- CHANGES BY MY OWN -------------------------------------------------------------------->
@@ -137,6 +122,108 @@
             });
         });
     </script>
+
+    <!-- ------------------------------------ABOUT SECTION JAVASCRIPT-------------------------------------------------------- -->
+
+    <!-- JavaScript for dynamic tab functionality -->
+    
+    <!-- <script>
+        // Existing tab functionality
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+    
+        function opentab(tabname, event) {
+            console.log("Opening tab:", tabname);  // Log which tab is being opened
+            for (let tablink of tablinks) {
+                tablink.classList.remove("active-link");
+            }
+            for (let tabcontent of tabcontents) {
+                tabcontent.style.display = 'none';  // Ensure that the tab content is not displayed
+                tabcontent.classList.remove('active-tab');  // Ensure CSS transitions are reset
+            }
+            setTimeout(() => {
+                const activeTab = document.getElementById(tabname);
+                activeTab.style.display = 'block';  // Display the tab content before adding 'active-tab'
+                requestAnimationFrame(() => {
+                    activeTab.classList.add('active-tab');  // Add 'active-tab' to trigger the transition
+                });
+                event.currentTarget.classList.add("active-link");
+            }, 10);  // Minimal delay to ensure the display property changes are applied
+        }
+    
+        // New Intersection Observer for animations
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    console.log("Observing elements:", entry.target);  // Log the element being observed
+                    if (entry.isIntersecting) {
+                        console.log("Element is in viewport:", entry.target);  // Log when element is visible
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.5 // Adjust based on when you want the animation to start
+            });
+    
+            document.querySelectorAll('[data-animate="true"]').forEach((el, index) => {
+                el.style.setProperty('--animation-order', index);
+                observer.observe(el);
+            });
+        });
+    </script> -->
+
+    <script>
+        // Existing tab functionality
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+    
+        function opentab(tabname, event) {
+            console.log("Opening tab:", tabname);  // Log which tab is being opened
+            for (let tablink of tablinks) {
+                tablink.classList.remove("active-link");
+            }
+            for (let tabcontent of tabcontents) {
+                tabcontent.style.display = 'none';  // Ensure that the tab content is not displayed
+                tabcontent.classList.remove('active-tab');  // Ensure CSS transitions are reset
+                tabcontent.style.opacity = '0';  // Reset opacity to 0
+                tabcontent.style.transform = 'translateY(20px)';  // Start the transform from a lower position
+            }
+            requestAnimationFrame(() => {
+                const activeTab = document.getElementById(tabname);
+                activeTab.style.display = 'block';  // Set display but keep invisible
+                requestAnimationFrame(() => {
+                    activeTab.classList.add('active-tab');  // Now start the transition to visible
+                    activeTab.style.opacity = '1';
+                    activeTab.style.transform = 'translateY(0)';
+                });
+            });
+            event.currentTarget.classList.add("active-link");
+        }
+    
+        // New Intersection Observer for animations
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM fully loaded and parsed");
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    console.log("Observing elements:", entry.target);  // Log the element being observed
+                    if (entry.isIntersecting) {
+                        console.log("Element is in viewport:", entry.target);  // Log when element is visible
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.5 // Adjust based on when you want the animation to start
+            });
+    
+            document.querySelectorAll('[data-animate="true"]').forEach((el, index) => {
+                el.style.setProperty('--animation-order', index);
+                observer.observe(el);
+            });
+        });
+    </script>
+    
+
 
     <!-- JavaScript for modal interaction and content loading -->
     <script>
@@ -183,6 +270,9 @@
     
         document.addEventListener('DOMContentLoaded', typeAnimation);
     </script>
+
+
+
 
 
 
