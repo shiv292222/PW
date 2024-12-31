@@ -389,51 +389,95 @@ nav ul li a:hover::after{
 
 
 #services {
-    padding: 20px 0;  /* Consistent padding */
+    padding: 20px 0;  /* Consistent padding for the section */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
 }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* Reduced min width for each box */
-    grid-gap: 30px;  /* Consistent gap between boxes */
-    margin-top: 40px;  /* Consistent top margin */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* Responsive grid setup for service boxes */
+    grid-gap: 30px;  /* Gap between the boxes */
+    margin-top: 40px;  /* Top margin for spacing */
 }
 
 .services-list div {
     background: #262626;
-    padding: 20px;  /* Slightly reduced padding for smaller boxes */
-    font-size: 12px;  /* Consistent font size */
+    padding: 20px;  /* Padding inside each service box */
+    font-size: 12px;  /* Font size for the text */
     font-weight: 300;
-    border-radius: 8px;  /* Consistent border radius */
-    transition: background 0.5s, transform 0.5s;
-    
-    display: flex;  /* Flexbox for alignment */
-    flex-direction: column;  /* Vertical stacking */
-    justify-content: space-between;  /* Space distribution */
-    height: 280px;  /* Reduced height for smaller boxes */
-}
-
-.services-list div i {
-    font-size: 40px;  /* Consistent icon size */
-    margin-bottom: 20px;  /* Consistent margin below the icon */
-}
-.services-list div h2 {
-    font-size: 24px;  /* Consistent heading size */
-    font-weight: 500;
-    margin-bottom: 10px;  /* Consistent margin below the heading */
-}
-.services-list div p {
-    flex-grow: 1;  /* Allows the paragraph to expand */
-    margin-bottom: 10px;  /* Consistent spacing above the 'Learn more' link */
-}
-.services-list div a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 11px;  /* Consistent link text size */
-    margin-top: 15px;  /* Consistent margin above the link */
-    display: inline-block;
+    border-radius: 8px;  /* Rounded corners for the boxes */
+    transition: transform 0.5s ease, box-shadow 0.5s ease;  /* Smooth transition for hover effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+    height: 280px;  /* Fixed height for uniformity */
+    display: flex;  /* Using flexbox for internal alignment */
+    flex-direction: column;  /* Elements stacked vertically */
+    justify-content: space-between;  /* Distribute space between elements */
 }
 
 .services-list div:hover {
-    background: #ff004f;
-    transform: translateY(-10px);  /* Hover effect for elevation */
+    background: #ff004f;  /* Background color change on hover */
+    transform: scale(1.05);  /* Scale effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Enhanced shadow for 3D effect */
+}
+
+/* Icon styling */
+.services-list div i {
+    font-size: 40px;  /* Large icons for visibility */
+    margin-bottom: 20px;  /* Space below icons */
+}
+
+/* Heading styling */
+.services-list div h2 {
+    font-size: 24px;  /* Heading size */
+    font-weight: 500;
+    margin-bottom: 10px;  /* Margin below the heading */
+}
+
+/* Paragraph styling */
+.services-list div p {
+    flex-grow: 1;  /* Paragraph takes available space */
+    margin-bottom: 10px;  /* Margin above the 'Learn more' link */
+}
+
+/* Link styling */
+.services-list div a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 11px;  /* Smaller font size for the link */
+    margin-top: 15px;  /* Margin above the link */
+    display: inline-block;  /* Ensures link is properly aligned */
+}
+
+/* Micro-interaction for links */
+.services-list div a {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s;
+}
+
+.services-list div a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+}
+
+.services-list div a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
