@@ -306,10 +306,6 @@ nav ul li a:hover::after{
 }
 
 
-
-
-
-
 /* ------------------------------------------------------ABOUT SEC END------------------------------------------------------ */
 
 
@@ -385,4 +381,59 @@ nav ul li a:hover::after{
     .logo {
         margin-bottom: 20px; /* Space between logo and nav items */
     }
+}
+
+
+
+/* ---------------------------------------------service section-------------------------------------------------- */
+
+
+#services {
+    padding: 20px 0;  /* Consistent padding */
+}
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* Reduced min width for each box */
+    grid-gap: 30px;  /* Consistent gap between boxes */
+    margin-top: 40px;  /* Consistent top margin */
+}
+
+.services-list div {
+    background: #262626;
+    padding: 20px;  /* Slightly reduced padding for smaller boxes */
+    font-size: 12px;  /* Consistent font size */
+    font-weight: 300;
+    border-radius: 8px;  /* Consistent border radius */
+    transition: background 0.5s, transform 0.5s;
+    
+    display: flex;  /* Flexbox for alignment */
+    flex-direction: column;  /* Vertical stacking */
+    justify-content: space-between;  /* Space distribution */
+    height: 280px;  /* Reduced height for smaller boxes */
+}
+
+.services-list div i {
+    font-size: 40px;  /* Consistent icon size */
+    margin-bottom: 20px;  /* Consistent margin below the icon */
+}
+.services-list div h2 {
+    font-size: 24px;  /* Consistent heading size */
+    font-weight: 500;
+    margin-bottom: 10px;  /* Consistent margin below the heading */
+}
+.services-list div p {
+    flex-grow: 1;  /* Allows the paragraph to expand */
+    margin-bottom: 10px;  /* Consistent spacing above the 'Learn more' link */
+}
+.services-list div a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 11px;  /* Consistent link text size */
+    margin-top: 15px;  /* Consistent margin above the link */
+    display: inline-block;
+}
+
+.services-list div:hover {
+    background: #ff004f;
+    transform: translateY(-10px);  /* Hover effect for elevation */
 }
