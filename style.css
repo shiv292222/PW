@@ -35,9 +35,49 @@ nav{
     flex-wrap: wrap;
 }
 
-.logo{
-    width: 140px;
+/* Logo Design */
+.logo {
+    font-family: Arial, sans-serif;
+    font-size: 36px; /* Default font size for larger screens */
+    font-weight: bold;
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid red;
+    padding: 5px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
 }
+
+/* Red Text for 'S' */
+.red-text {
+    color: red;
+}
+
+/* Hover Effects */
+.logo:hover {
+    background-color: red;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 28px; /* Smaller font size for small screens */
+        padding: 3px 10px; /* Adjusted padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 24px; /* Further reduced size for very small screens */
+        padding: 2px 8px;
+    }
+}
+/* ------------------logo design over------------------------- */
 
 nav ul li{
     display: inline-block;
