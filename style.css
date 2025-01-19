@@ -830,3 +830,48 @@ nav .fas{
         transform: rotate(360deg);
     }
 }
+
+#about [data-animate] {
+    opacity: 1; /* Fully visible */
+    visibility: visible;
+    transform: none; /* Reset transform */
+    animation: none; /* Disable any additional animations */
+}
+/* Default animation state */
+[data-animate] {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px); /* Default slide-in effect */
+    transition: all 0.8s ease-in-out; /* Smooth transition */
+}
+
+/* Visible state for fade-in */
+[data-animate="fade-in"].visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Visible state for slide-in */
+[data-animate="slide-in"].visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Visible state for scale-up */
+[data-animate="scale-up"].visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* Initial state for slide-in */
+[data-animate="slide-in"] {
+    transform: translateX(-30px); /* Slide in from left */
+}
+
+/* Initial state for scale-up */
+[data-animate="scale-up"] {
+    transform: scale(0.9); /* Start slightly smaller */
+}

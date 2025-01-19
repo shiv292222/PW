@@ -37,7 +37,7 @@
     </div>
 
     <!-- -----------------------------------ABOUT-------------------------------------------- -->
-    <div id="about">
+    <div id="about" data-animate="scale-up">
         <div class="container">
             <div class="row">
                 <div class="about-col-1" data-animate="true">
@@ -116,7 +116,7 @@
 
     <!-- ---------------------------------------------------services---------------------- -->
 
-    <div id="services">
+    <div id="services" data-animate="fade-in">
         <div class="container">
             <h1 class="sub-title">My Services</h1>
             <div class="services-list">
@@ -185,7 +185,7 @@
     <!-- -------------------------- PORTFOLIO SECTION --------------------------------------------------------------------------------- -->
 
 
-    <div id="portfolio">
+    <div id="portfolio" data-animate="slide-in">
         <div class="container">
             <h1 class="sub-title">My Work</h1>
             <div class="work-list">
@@ -221,7 +221,7 @@
     <!-- ----------contact------------- --><!-- ----------contact------------- --><!-- ----------contact------------- --><!-- ----------contact------------- -->
     
 
-    <div id="contact">
+    <div id="contact" data-animate="scale-up">
         <div class="container">
             <div class="row">
                 <div class="contact-left">
@@ -470,6 +470,31 @@
             }, 500); // Matches the fade-out transition duration
         }, 2000); // Extend visibility by 2 seconds
     });
+</script>
+
+
+<!-- ------------------------------------- animation------------------------------- -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                // Apply animations when elements become visible
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible"); // Add the visible class
+                    observer.unobserve(entry.target); // Stop observing after animation
+                }
+            });
+        },
+        { threshold: 0.2 } // Trigger animation when 20% of the element is visible
+    );
+
+    // Select all elements with data-animate
+    const animatedElements = document.querySelectorAll("[data-animate]");
+    animatedElements.forEach((el) => observer.observe(el));
+});
+
+
 </script>
 
 
