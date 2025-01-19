@@ -8,6 +8,11 @@
     <script src="https://kit.fontawesome.com/41451c6194.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
     <div id="header">
         <div class="container">
             <nav>
@@ -450,6 +455,22 @@
         .catch(error => console.error('Error!', error.message))
     })
       </script>
+
+<!-- ---------------------------load function---------------------------- -->
+<script>
+    window.addEventListener("load", function () {
+        const preloader = document.getElementById("preloader");
+
+        // Extend visibility time
+        setTimeout(() => {
+            preloader.style.opacity = "0";
+            preloader.style.transition = "opacity 0.5s ease-out";
+            setTimeout(() => {
+                preloader.style.display = "none";
+            }, 500); // Matches the fade-out transition duration
+        }, 2000); // Extend visibility by 2 seconds
+    });
+</script>
 
 
 
